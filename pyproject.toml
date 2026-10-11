@@ -1,0 +1,23 @@
+[project]
+name = "knowledge-graphs-for-rag"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "s.touqeer@pharmatrace.io", email = "s.touqeer@pharmatrace.io" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "python-dotenv>=1.0.1",
+    "langchain-community>=0.3.0",
+    "langchain-ollama>=0.2.0",
+    "langchain-text-splitters>=0.3.0",
+    "neo4j>=5.25.0",
+]
+
+[project.scripts]
+knowledge-graphs-for-rag = "knowledge_graphs_for_rag:main"
+
+[build-system]
+requires = ["uv_build>=0.12.21,<0.13.0"]
+build-backend = "uv_build"
