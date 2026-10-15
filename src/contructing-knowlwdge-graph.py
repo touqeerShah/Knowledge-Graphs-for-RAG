@@ -10,6 +10,7 @@ Or run the complete sequence with --lab all.
 from __future__ import annotations
 
 import argparse
+import sys
 
 from labs.lab_01_inspect_data import run as lab_1
 from labs.lab_02_chunk_text import run as lab_2
@@ -31,8 +32,12 @@ def main() -> None:
     parser.add_argument("--lab", choices=[*(str(number) for number in LABS), "all"], default="1")
     args = parser.parse_args()
     selected = LABS.values() if args.lab == "all" else (LABS[int(args.lab)],)
-    for lab in selected:
-        lab()
+    try:
+        for lab in selected:
+            lab()
+    except RuntimeError as error:
+        print(f"\nSetup error: {error}", file=sys.stderr)
+        raise SystemExit(1) from error
 
 
 if __name__ == "__main__":

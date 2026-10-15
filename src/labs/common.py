@@ -75,7 +75,15 @@ def split_form10k(path: Path = DEFAULT_SEC_FILE) -> list[dict[str, Any]]:
 
 def get_graph():
     """Connect to Neo4j using values from .env."""
-    from langchain_community.graphs import Neo4jGraph
+    try:
+        from langchain_community.graphs import Neo4jGraph
+    except ModuleNotFoundError as error:
+        if error.name == "langchain_community":
+            raise RuntimeError(
+                "Neo4j labs need project dependencies. Run "
+                "`python3 -m pip install -e .` first."
+            ) from error
+        raise
     required = ("NEO4J_URI", "NEO4J_USERNAME", "NEO4J_PASSWORD")
     missing = [name for name in required if not os.getenv(name)]
     if missing:

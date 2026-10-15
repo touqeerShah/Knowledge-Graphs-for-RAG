@@ -30,6 +30,13 @@ Install the project dependencies:
 uv sync
 ```
 
+If you are running the examples with the system `python3` command shown below,
+install the project into that Python environment instead:
+
+```bash
+python3 -m pip install -e .
+```
+
 Install and start [Ollama](https://ollama.com), then download the default models:
 
 ```bash
